@@ -1,0 +1,91 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль пользователя postgres:
+psql (16.0)
+ПРЕДУПРЕЖДЕНИЕ: Кодовая страница консоли (866) отличается от основной
+                страницы Windows (1251).
+                8-битовые (русские) символы могут отображаться некорректно.
+                Подробнее об этом смотрите документацию psql, раздел
+                "Notes for Windows users".
+Введите "help", чтобы получить справку.
+
+postgres=# INSERT INTO students(
+postgres(# first_name, last_name, email, address)
+postgres-# VALUES('Adel','Zhyldyz','adel@gmail.com','12 mkn'),
+postgres-# ('Tunuk', 'Zhumabekova','tunuk@gmail.com','Isakeeva 32');
+INSERT 0 2
+postgres=# CREATE TABLE mentors(
+postgres(# id serial primary key,
+postgres(# name varchar not null,
+postgres(# last_name varchar not null,
+postgres(# email varchar unicue,
+postgres(# phone_num integer
+postgres(# );
+ОШИБКА:  ошибка синтаксиса (примерное положение: "unicue")
+СТРОКА 5: email varchar unicue,
+                        ^
+postgres=# CREATE TABLE mentors(
+postgres(# id serial primary key,
+postgres(# name varchar not null,
+postgres(# last_name varchar not null,
+postgres(# email varchar unique
+postgres(# );
+CREATE TABLE
+postgres=# INSERT INTO mentors(
+postgres(# name,last_name, email)
+postgres-# VALUES('Ainazik','T','ainazz@gmail.com'),
+postgres-# ('Datka','M','datka@gmail.com');
+INSERT 0 2
+postgres=# CREATE TABLE profession(
+postgres(# id serial primary key,
+postgres(# name varchar not null
+postgres(# );
+CREATE TABLE
+postgres=# INSERT INTO profession(
+postgres(# name)
+postgres-# VALUES('Mentor'),
+postgres-# ('Instruktor'),
+postgres-# ('Accountant');
+INSERT 0 3
+postgres=# CREATE TABLE peaksoft(
+postgres(# );
+CREATE TABLE
+postgres=# CREATE TABLE courses(
+postgres(# id serial primary key,
+postgres(# name varchar not null
+postgres(# );
+CREATE TABLE
+postgres=# INSERT INTO courses(
+postgres(# name)
+postgres-# VALUE('java'),
+postgres-# ('js');
+ОШИБКА:  ошибка синтаксиса (примерное положение: "VALUE")
+СТРОКА 3: VALUE('java'),
+          ^
+postgres=# INSERT INTO courses(
+postgres(# name)
+postgres-# VALUES('java'),
+postgres-# ('js');
+INSERT 0 2
+postgres=# INSERT INTO peaksoft(
+postgres(# );
+ОШИБКА:  ошибка синтаксиса (примерное положение: ")")
+СТРОКА 2: );
+          ^
+postgres=# ALTER TABLE courses add column mentors_id integer REFERENCE mentors(id);
+ОШИБКА:  ошибка синтаксиса (примерное положение: "REFERENCE")
+СТРОКА 1: ALTER TABLE courses add column mentors_id integer REFERENCE ...
+                                                            ^
+postgres=# ALTER TABLE courses add column mentors_id integer REFERENCES mentors(id);
+ALTER TABLE
+postgres=# ALTER TABLE courses drop column mentors_id;
+ALTER TABLE
+postgres=# ALTER TABLE peaksoft add column courses_id integer REFERENCES courses(id);
+ALTER TABLE
+postgres=# ALTER TABLE peaksoft add column mentors_id integer REFERENCES mentors(id);
+ALTER TABLE
+postgres=# ALTER TABLE peaksoft add column students_id integer REFERENCES students(id);
+ALTER TABLE
+postgres=#
